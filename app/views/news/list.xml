@@ -4,18 +4,17 @@
     http://docs.nativescript.org/ui/action-bar
     -->
     <Page.actionBar>
-        <ActionBar title="VIDAL Mobile" icon="" class="action-bar">
+        <ActionBar title="" icon="res://icon" android.iconVisibility="always">
         </ActionBar>
     </Page.actionBar>
     <ListView items="{{ news }}" itemTap="tapHandler">
         <ListView.itemTemplate>
-            <FlexboxLayout  height="100">
-                <Image src="{{ images[0].url_image }}" height="100" width="200"/>
-                <FlexboxLayout  height="100" flexDirection="column" padding="10">
-                    <Label text="{{ title_news }}" textWrap="true"/>
-                    <label text="{{ publication_date_news }}" className="date"/>
-                </FlexboxLayout>
-            </FlexboxLayout>
+            <GridLayout columns="100, *, 150" rows="auto, 30">
+                <Image src="{{ images[0].url_image }}" height="100" width="200" rowSpan="2" row="0" col="0"/>
+                <Label text="{{ decoded_title }}" textWrap="true" class="title" colSpan="2" row="0" col="1" margin="5"/>
+                <label text="{{ type.decoded_name }}" className="type" row="1" col="1" margin="5"/>
+                <label text="{{ formated_date }}" className="date" row="1" col="2" margin="5"/>
+            </GridLayout>
         </ListView.itemTemplate>
     </ListView>
 </Page>
