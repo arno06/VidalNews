@@ -14,6 +14,8 @@ The imported CSS rules must precede all other types of rules.
 
 ActionBar{background-color:#b20740;color:#fff;}
 
+ActivityIndicator{color:#cc0033;}
+
 .title{
     font-size:18;color:#222;
 }
@@ -24,6 +26,10 @@ ActionBar{background-color:#b20740;color:#fff;}
 
 .type{
     color:#cc0033;font-style:italic;
+}
+
+Page.listing ListView Image{
+    opacity:0;
 }
 
 Page.details{

@@ -10,6 +10,7 @@ var dictionary = require('../../vidal/Dictionary');
 class NewsListViewModel extends observableModule.Observable{}
 
 var bc = new NewsListViewModel();
+bc.set('isLoading', true);
 
 function formatDate(pDate){
     let d = pDate.split('-');
@@ -17,7 +18,7 @@ function formatDate(pDate){
 }
 
 function navigatingToHandler(args) {
-    var page = args.object;
+    let page = args.object;
     page.bindingContext = bc;
 }
 
@@ -48,7 +49,7 @@ exports.showSideDrawer = function(){
 
 exports.navigatingToHandler = navigatingToHandler;
 
-exports.loadedHandler = function(){
+exports.loadedHandler = function(e){
 
     var url = config.api.resources.url+"news?order=publication_date_news:desc&token="+config.api.resources.token;
 
@@ -61,5 +62,12 @@ exports.loadedHandler = function(){
             r.results[i].formated_date = formatDate(r.results[i].publication_date_news);
         }
         bc.set('news', r.results);
+        e.object.getViewById("loading").animate({opacity:0,duration:500}).then(function(){
+            bc.set("isLoading", false);
+        });
     }, function(e){});
+};
+
+exports.imageLoadedHandler = function(e){
+    e.object.animate({opacity:1, duration:400});
 };

@@ -1,4 +1,4 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" class="page" loaded="loadedHandler" navigatingTo="navigatingToHandler">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" class="listing" loaded="loadedHandler" navigatingTo="navigatingToHandler">
     <!--
     The ActionBar is the NativeScript common abstraction over the Android ActionBar and iOS NavigationBar.
     http://docs.nativescript.org/ui/action-bar
@@ -7,14 +7,17 @@
         <ActionBar title="" icon="res://icon" android.iconVisibility="always">
         </ActionBar>
     </Page.actionBar>
-    <ListView items="{{ news }}" itemTap="tapHandler">
-        <ListView.itemTemplate>
-            <GridLayout columns="100, *, 150" rows="auto, 30">
-                <Image src="{{ images[0].url_image }}" height="100" width="200" rowSpan="2" row="0" col="0"/>
-                <Label text="{{ decoded_title }}" textWrap="true" class="title" colSpan="2" row="0" col="1" margin="5"/>
-                <label text="{{ type.decoded_name }}" className="type" row="1" col="1" margin="5"/>
-                <label text="{{ formated_date }}" className="date" row="1" col="2" margin="5"/>
-            </GridLayout>
-        </ListView.itemTemplate>
-    </ListView>
+    <GridLayout>
+        <ActivityIndicator id="loading" busy="{{ isLoading }}" width="40" height="40"/>
+        <ListView items="{{ news }}" itemTap="tapHandler">
+            <ListView.itemTemplate>
+                <GridLayout columns="100, *, 150" rows="auto, 30">
+                    <Image src="{{ images[0].url_image }}" height="100" width="200" rowSpan="2" row="0" col="0" loaded="imageLoadedHandler"/>
+                    <Label text="{{ decoded_title }}" textWrap="true" class="title" colSpan="2" row="0" col="1" margin="5"/>
+                    <label text="{{ type.decoded_name }}" className="type" row="1" col="1" margin="5"/>
+                    <label text="{{ formated_date }}" className="date" row="1" col="2" margin="5"/>
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+    </GridLayout>
 </Page>
